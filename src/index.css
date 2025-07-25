@@ -1,0 +1,275 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 221.2 83.2% 40.2%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-tajawal transition-colors duration-300;
+  }
+}
+
+/* Custom styles */
+.font-tajawal {
+  font-family: 'Tajawal', sans-serif;
+}
+
+.rtl {
+  direction: rtl;
+}
+
+.receipt-container {
+  max-width: 80mm;
+  margin: 0 auto;
+  background-color: white;
+  color: black;
+}
+
+/* POS Styles */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+/* Responsive Styles */
+.layout-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+@media (min-width: 1024px) {
+  .layout-container {
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Glassmorphism */
+.glass {
+  @apply backdrop-blur-md bg-opacity-70 border border-opacity-20 shadow-lg;
+}
+
+.dark .glass {
+  @apply bg-gray-800/50 border-white/10;
+}
+
+.light .glass {
+  @apply bg-white/70 border-gray-200;
+}
+
+/* Color spots */
+.color-spot {
+  @apply absolute rounded-full blur-3xl;
+  z-index: -1;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Top tab bar */
+.top-tab-bar {
+  @apply bg-background border-b border-border z-50 py-1 px-1 md:py-2 md:px-4;
+}
+
+.dark .top-tab-bar {
+  @apply bg-gray-900/95 border-gray-700/70 backdrop-blur-md;
+}
+
+.light .top-tab-bar {
+  @apply bg-white/95 border-gray-200/70 backdrop-blur-md;
+}
+
+/* Fix for dark mode product cards */
+.dark .product-card {
+  @apply bg-gray-800 border-gray-700 text-gray-100;
+}
+
+.dark .product-card .product-price {
+  @apply text-green-400;
+}
+
+.dark .product-card .product-stock {
+  @apply text-gray-300;
+}
+
+.dark .product-card .product-name {
+  @apply text-white;
+}
+
+.dark .product-card .product-category {
+  @apply text-gray-300;
+}
+
+.dark .product-card-actions button {
+  @apply bg-gray-700 text-white hover:bg-gray-600;
+}
+
+/* Fix for printing */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .receipt-container, .receipt-container * {
+    visibility: visible;
+    color: black;
+    background-color: white;
+  }
+  .receipt-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+/* Landing page */
+.landing-container {
+  @apply min-h-screen flex flex-col items-center justify-center relative overflow-hidden p-4;
+}
+
+.landing-content {
+  @apply z-10 text-center max-w-3xl mx-auto;
+}
+
+.landing-title {
+  @apply text-4xl md:text-6xl font-bold mb-6 animate-fade-in dark:text-white;
+}
+
+.landing-subtitle {
+  @apply text-xl md:text-2xl mb-8 opacity-80 animate-fade-in dark:text-gray-300;
+  animation-delay: 200ms;
+}
+
+.landing-cta {
+  @apply px-8 py-3 rounded-full bg-primary text-primary-foreground font-medium text-lg shadow-lg hover:shadow-xl transition-all animate-fade-in;
+  animation-delay: 400ms;
+}
+
+/* Mobile optimization */
+@media (max-width: 640px) {
+  .top-tab-bar {
+    @apply pb-1 pt-2;
+  }
+  
+  .top-tab-bar a {
+    @apply text-center p-0;
+  }
+}
+
+/* Ensure vite.config.ts includes html2pdf.js in optimizeDeps */
